@@ -24,7 +24,7 @@ export interface IAuthorsRepository {
   update(author: Author): Promise<Author>
   delete(id: string): Promise<Author>
   findById(id: string): Promise<Author>
-  findByEmail(email: string): Promise<Author>
+  findByEmail(email: string): Promise<Author | null>
   search(search: SearchParams): Promise<SearchResult>
   get(id: string): Promise<Author>
 }
