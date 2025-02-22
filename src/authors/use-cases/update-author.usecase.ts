@@ -4,7 +4,7 @@ import { ConflictError } from '@/shared/errors/conflict-error'
 import { AuthorsRepository } from '../repositories/authors.repository'
 import { AuthorOutput } from '../dto/author.output'
 
-export namespace UpdateAuthorUsecase {
+export namespace UpdateAuthorUseCase {
   export type Input = Partial<Author>
 
   export type Output = AuthorOutput

@@ -3,13 +3,13 @@ import { PrismaClient } from '@prisma/client'
 import { execSync } from 'node:child_process'
 import { NotFoundError } from '@/shared/errors/not-found-error'
 import { AuthorsRepository } from '@/authors/repositories/authors.repository'
-import { DeleteAuthorUsecase } from '../delete-author.usecase'
+import { DeleteAuthorUseCase } from '../delete-author.usecase'
 import { AuthorDataBuilder } from '@/authors/helpers/author-data-builder'
 
-describe('DeleteAuthorUsecase Integration Tests', () => {
+describe('DeleteAuthorUseCase Integration Tests', () => {
   let module: TestingModule
   let repository: AuthorsRepository
-  let usecase: DeleteAuthorUsecase.Usecase
+  let usecase: DeleteAuthorUseCase.Usecase
   const prisma = new PrismaClient()
 
   jest.setTimeout(60000);
@@ -19,7 +19,7 @@ describe('DeleteAuthorUsecase Integration Tests', () => {
     await prisma.$connect()
     module = await Test.createTestingModule({}).compile()
     repository = new AuthorsRepository(prisma as any)
-    usecase = new DeleteAuthorUsecase.Usecase(repository)
+    usecase = new DeleteAuthorUseCase.Usecase(repository)
   })
 
   beforeEach(async () => {
