@@ -1,25 +1,25 @@
-import { Test, TestingModule } from "@nestjs/testing"
-import { PrismaClient } from "@prisma/client"
-import { execSync } from "child_process"
-import { AuthorsRepository } from "@/authors/repositories/authors.repository"
-import { AuthorDataBuilder } from "@/authors/helpers/author-data-builder"
-import { GetAuthorUseCase } from "../get-author.usecase"
-import { NotFoundError } from "@/shared/errors/not-found-error"
+import { Test, TestingModule } from '@nestjs/testing'
+import { PrismaClient } from '@prisma/client'
+import { execSync } from 'node:child_process'
+import { NotFoundError } from '@/shared/errors/not-found-error'
+import { AuthorsRepository } from '@/authors/repositories/authors.repository'
+import { DeleteAuthorUsecase } from '../delete-author.usecase'
+import { AuthorDataBuilder } from '@/authors/helpers/author-data-builder'
 
-describe("GetAuthorUseCase Integration Test", () => {
+describe('DeleteAuthorUsecase Integration Tests', () => {
   let module: TestingModule
   let repository: AuthorsRepository
-  let usecase: GetAuthorUseCase.Usecase
+  let usecase: DeleteAuthorUsecase.Usecase
   const prisma = new PrismaClient()
 
   jest.setTimeout(60000);
 
   beforeAll(async () => {
-    execSync("npm run prisma:migrate-test")
+    execSync('npm run prisma:migrate-test')
     await prisma.$connect()
     module = await Test.createTestingModule({}).compile()
     repository = new AuthorsRepository(prisma as any)
-    usecase = new GetAuthorUseCase.Usecase(repository)
+    usecase = new DeleteAuthorUsecase.Usecase(repository)
   })
 
   beforeEach(async () => {
@@ -36,10 +36,14 @@ describe("GetAuthorUseCase Integration Test", () => {
     ).rejects.toBeInstanceOf(NotFoundError)
   })
 
-  test('should be able to get author by id', async () => {
+  test('should delete a author', async () => {
     const data = AuthorDataBuilder({})
     const author = await prisma.author.create({ data })
+
     const result = await usecase.execute({ id: author.id })
     expect(result).toStrictEqual(author)
+
+    const authors = await prisma.author.findMany()
+    expect(authors).toHaveLength(0)
   })
 })

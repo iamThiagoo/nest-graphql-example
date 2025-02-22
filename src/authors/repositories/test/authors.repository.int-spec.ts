@@ -127,7 +127,7 @@ describe("AuthorsRepository Integration Test", () => {
       })
 
       result.rows.reverse().forEach((row, index) => {
-        expect(`${row.email}${index + 1}@a.com`)
+        expect(row.email).toEqual(`author${index + 1}@a.com`)
       })
     })
 

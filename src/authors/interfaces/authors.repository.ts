@@ -4,9 +4,9 @@ import { ICreatreAuthor } from './create-author'
 export interface SearchParams {
   page?: number
   perPage?: number
-  filter?: string
-  sort?: string
-  sortDir?: 'asc' | 'desc'
+  filter?: string | null
+  sort?: string | null
+  sortDir?: 'asc' | 'desc' | null
 }
 
 export interface SearchResult {
