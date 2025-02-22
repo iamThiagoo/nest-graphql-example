@@ -7,7 +7,7 @@ export class PostsRepository implements IPostsRepository {
 
   constructor(private prismaService: PrismaService) {}
 
-  async create(data: Omit<Post, 'id' | 'createdAt'>): Promise<Post> {
+  async create(data: Omit<Post, 'id' | 'createdAt' | 'author'>): Promise<Post> {
     const post = await this.prismaService.post.create({ data })
     return post
   }
@@ -15,7 +15,7 @@ export class PostsRepository implements IPostsRepository {
   async update(postParam: Post): Promise<Post> {
     await this.get(postParam.id)
     const post = await this.prismaService.post.update({
-      data: postParam,
+      data: postParam as any,
       where: {
         id: postParam.id,
       },
