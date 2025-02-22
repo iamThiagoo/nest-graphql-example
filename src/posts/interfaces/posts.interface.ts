@@ -1,4 +1,3 @@
-
 import { Post } from '../graphql/models/post'
 
 export interface IPostsRepository {

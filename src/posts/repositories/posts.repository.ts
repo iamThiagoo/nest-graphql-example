@@ -4,7 +4,6 @@ import { IPostsRepository } from '../interfaces/posts.interface'
 import { NotFoundError } from '@/shared/errors/not-found-error'
 
 export class PostsRepository implements IPostsRepository {
-
   constructor(private prismaService: PrismaService) {}
 
   async create(data: Omit<Post, 'id' | 'createdAt' | 'author'>): Promise<Post> {

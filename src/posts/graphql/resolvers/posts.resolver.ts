@@ -1,4 +1,11 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql'
 import { Post } from '../models/post'
 import { Inject } from '@nestjs/common'
 import { CreatePostUseCase } from '@/posts/use-cases/create-post.usecase'

@@ -1,22 +1,22 @@
-import { Test, TestingModule } from "@nestjs/testing"
-import { PrismaClient } from "@prisma/client"
-import { execSync } from "child_process"
-import { AuthorDataBuilder } from "../../helpers/author-data-builder"
-import { AuthorsRepository } from "../../repositories/authors.repository"
-import { CreateAuthorUseCase } from "../create-author.usecase"
-import { BadRequestError } from "@/shared/errors/bad-request-error"
-import { ConflictError } from "@/shared/errors/conflict-error"
+import { Test, TestingModule } from '@nestjs/testing'
+import { PrismaClient } from '@prisma/client'
+import { execSync } from 'child_process'
+import { AuthorDataBuilder } from '../../helpers/author-data-builder'
+import { AuthorsRepository } from '../../repositories/authors.repository'
+import { CreateAuthorUseCase } from '../create-author.usecase'
+import { BadRequestError } from '@/shared/errors/bad-request-error'
+import { ConflictError } from '@/shared/errors/conflict-error'
 
-describe("CreateAuthorUseCase Integration Test", () => {
+describe('CreateAuthorUseCase Integration Test', () => {
   let module: TestingModule
   let repository: AuthorsRepository
   let usecase: CreateAuthorUseCase.UseCase
   const prisma = new PrismaClient()
 
-  jest.setTimeout(60000);
+  jest.setTimeout(60000)
 
   beforeAll(async () => {
-    execSync("npm run prisma:migrate-test")
+    execSync('npm run prisma:migrate-test')
     await prisma.$connect()
     module = await Test.createTestingModule({}).compile()
     repository = new AuthorsRepository(prisma as any)

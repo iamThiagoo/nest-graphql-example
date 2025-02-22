@@ -13,7 +13,7 @@ describe('UpdateAuthorUseCase Integration Tests', () => {
   let usecase: UpdateAuthorUseCase.Usecase
   const prisma = new PrismaClient()
 
-  jest.setTimeout(60000);
+  jest.setTimeout(60000)
 
   beforeAll(async () => {
     execSync('npm run prisma:migrate-test')

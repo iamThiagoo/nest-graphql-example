@@ -14,7 +14,6 @@ import { DeleteAuthorUseCase } from '@/authors/use-cases/delete-author.usecase'
 
 @Resolver(() => Author)
 export class AuthorsResolver {
-
   @Inject(ListAuthorsUseCase.Usecase)
   private listAuthorsUseCase: ListAuthorsUseCase.Usecase
 
@@ -31,13 +30,15 @@ export class AuthorsResolver {
   private deleteAuthorUseCase: GetAuthorUseCase.Usecase
 
   @Query(() => SearchAuthorsResult)
-  async authors(@Args() { page, perPage, sort, sortDir, filter } : SearchParamsArgs) {
+  async authors(
+    @Args() { page, perPage, sort, sortDir, filter }: SearchParamsArgs,
+  ) {
     return this.listAuthorsUseCase.execute({
       page,
       perPage,
       sort,
       sortDir,
-      filter
+      filter,
     })
   }
 

@@ -1,14 +1,14 @@
-import { PrismaService } from '@/database/prisma/prisma.service';
-import { Module } from '@nestjs/common';
-import { PostsRepository } from './repositories/posts.repository';
-import { AuthorsRepository } from '@/authors/repositories/authors.repository';
-import { CreatePostUseCase } from './use-cases/create-post.usecase';
-import { GetPostUseCase } from './use-cases/get-post.usecase';
-import { PublishPostUseCase } from './use-cases/publish-post.usecase';
-import { UnpublishPostUseCase } from './use-cases/unpublish.usecase';
-import { GetAuthorUseCase } from '@/authors/use-cases/get-author.usecase';
-import { PostsResolver } from './graphql/resolvers/posts.resolver';
-import { DatabaseModule } from '@/database/database.module';
+import { PrismaService } from '@/database/prisma/prisma.service'
+import { Module } from '@nestjs/common'
+import { PostsRepository } from './repositories/posts.repository'
+import { AuthorsRepository } from '@/authors/repositories/authors.repository'
+import { CreatePostUseCase } from './use-cases/create-post.usecase'
+import { GetPostUseCase } from './use-cases/get-post.usecase'
+import { PublishPostUseCase } from './use-cases/publish-post.usecase'
+import { UnpublishPostUseCase } from './use-cases/unpublish.usecase'
+import { GetAuthorUseCase } from '@/authors/use-cases/get-author.usecase'
+import { PostsResolver } from './graphql/resolvers/posts.resolver'
+import { DatabaseModule } from '@/database/database.module'
 
 @Module({
   imports: [DatabaseModule],

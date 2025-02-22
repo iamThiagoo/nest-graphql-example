@@ -1,5 +1,5 @@
-import { AuthorOutput } from "@/authors/dto/author.output"
-import { AuthorsRepository } from "@/authors/repositories/authors.repository"
+import { AuthorOutput } from '@/authors/dto/author.output'
+import { AuthorsRepository } from '@/authors/repositories/authors.repository'
 
 export namespace DeleteAuthorUseCase {
   export type Input = {

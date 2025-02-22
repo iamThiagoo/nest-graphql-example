@@ -11,10 +11,10 @@ describe('ListAuthorsUsecase Integration Tests', () => {
   let usecase: ListAuthorsUseCase.Usecase
   const prisma = new PrismaClient()
 
-  jest.setTimeout(60000);
+  jest.setTimeout(60000)
 
   beforeAll(async () => {
-    execSync("npm run prisma:migrate-test")
+    execSync('npm run prisma:migrate-test')
     await prisma.$connect()
     module = await Test.createTestingModule({}).compile()
     repository = new AuthorsRepository(prisma as any)

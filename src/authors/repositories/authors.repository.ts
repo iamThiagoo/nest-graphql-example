@@ -15,26 +15,26 @@ export class AuthorsRepository implements IAuthorsRepository {
 
   async create(data: ICreatreAuthor): Promise<Author> {
     const author = await this.prisma.author.create({
-      data
+      data,
     })
 
-    return author;
+    return author
   }
 
   async update(author: Author): Promise<Author> {
     await this.get(author.id)
     const updated = await this.prisma.author.update({
       where: { id: author.id },
-      data: author
+      data: author,
     })
 
-    return updated;
+    return updated
   }
 
   async delete(id: string): Promise<Author> {
     const author = await this.get(id)
     await this.prisma.author.delete({
-      where: { id }
+      where: { id },
     })
 
     return author
@@ -46,41 +46,41 @@ export class AuthorsRepository implements IAuthorsRepository {
 
   async findByEmail(email: string): Promise<Author | null> {
     return this.prisma.author.findUnique({
-      where: { email }
-    });
+      where: { email },
+    })
   }
 
   async search(search: SearchParams): Promise<SearchResult> {
-    const {  page = 1, perPage = 15, filter, sort, sortDir } = search
+    const { page = 1, perPage = 15, filter, sort, sortDir } = search
     const sortable = this.sortableFields?.includes(sort!) || false
-    const orderByField  = sortable ? sort : 'createdAt'
+    const orderByField = sortable ? sort : 'createdAt'
     const orderByDir = sortable ? sortDir : 'desc'
 
-    const count = await this.prisma.author.count( {
-      ... (filter && {
+    const count = await this.prisma.author.count({
+      ...(filter && {
         where: {
           OR: [
-            { name: { contains: filter, mode: 'insensitive' }},
-            { email: { contains: filter, mode: 'insensitive'}}
-          ]
-        }
-      })
-    });
+            { name: { contains: filter, mode: 'insensitive' } },
+            { email: { contains: filter, mode: 'insensitive' } },
+          ],
+        },
+      }),
+    })
 
     const authors = await this.prisma.author.findMany({
-      ... (filter && {
+      ...(filter && {
         where: {
           OR: [
-            { name: { contains: filter, mode: 'insensitive' }},
-            { email: { contains: filter, mode: 'insensitive'}}
-          ]
-        }
+            { name: { contains: filter, mode: 'insensitive' } },
+            { email: { contains: filter, mode: 'insensitive' } },
+          ],
+        },
       }),
       orderBy: {
         [orderByField!]: orderByDir,
       },
       skip: page > 0 ? (page - 1) * perPage : 1,
-      take: perPage > 0 ? perPage : 15
+      take: perPage > 0 ? perPage : 15,
     })
 
     return {
@@ -88,13 +88,13 @@ export class AuthorsRepository implements IAuthorsRepository {
       currentPage: page,
       perPage,
       lastPage: Math.ceil(count / perPage),
-      total: count
+      total: count,
     }
   }
 
   async get(id: string): Promise<Author> {
     const author = await this.prisma.author.findUnique({
-      where: { id }
+      where: { id },
     })
 
     if (!author) {

@@ -1,5 +1,5 @@
-import { AuthorOutput } from "../dto/author.output"
-import { AuthorsRepository } from "../repositories/authors.repository"
+import { AuthorOutput } from '../dto/author.output'
+import { AuthorsRepository } from '../repositories/authors.repository'
 
 export namespace GetAuthorUseCase {
   export type Input = {

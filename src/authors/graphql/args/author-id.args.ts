@@ -3,7 +3,6 @@ import { IsNotEmpty, IsString } from 'class-validator'
 
 @ArgsType()
 export class AuthorIdArgs {
-
   @IsString()
   @IsNotEmpty()
   @Field()

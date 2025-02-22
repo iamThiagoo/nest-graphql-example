@@ -1,19 +1,19 @@
-import { Test, TestingModule } from "@nestjs/testing"
-import { PrismaClient } from "@prisma/client"
-import { execSync } from "child_process"
-import { NotFoundError } from "@/shared/errors/not-found-error"
-import { AuthorDataBuilder } from "@/authors/helpers/author-data-builder"
-import { AuthorsRepository } from "../authors.repository"
+import { Test, TestingModule } from '@nestjs/testing'
+import { PrismaClient } from '@prisma/client'
+import { execSync } from 'child_process'
+import { NotFoundError } from '@/shared/errors/not-found-error'
+import { AuthorDataBuilder } from '@/authors/helpers/author-data-builder'
+import { AuthorsRepository } from '../authors.repository'
 
-describe("AuthorsRepository Integration Test", () => {
+describe('AuthorsRepository Integration Test', () => {
   let module: TestingModule
   let repository: AuthorsRepository
   const prisma = new PrismaClient()
 
-  jest.setTimeout(60000);
+  jest.setTimeout(60000)
 
   beforeAll(async () => {
-    execSync("npm run prisma:migrate-test")
+    execSync('npm run prisma:migrate-test')
     await prisma.$connect()
     module = await Test.createTestingModule({}).compile()
     repository = new AuthorsRepository(prisma as any)
@@ -71,14 +71,16 @@ describe("AuthorsRepository Integration Test", () => {
     const author = await prisma.author.create({ data })
     const result = await repository.update({
       ...author,
-      name: 'name'
+      name: 'name',
     })
 
     expect(result.name).toBe('name')
   })
 
   test('should throws an error when deleting a author not found', async () => {
-    await expect(repository.delete("796c5a25-1d3b-4228-9a75-06f416c6e218")).rejects.toThrow(
+    await expect(
+      repository.delete('796c5a25-1d3b-4228-9a75-06f416c6e218'),
+    ).rejects.toThrow(
       new NotFoundError(
         'Author not found using ID 796c5a25-1d3b-4228-9a75-06f416c6e218',
       ),
@@ -119,7 +121,7 @@ describe("AuthorsRepository Integration Test", () => {
         })
       })
       await prisma.author.createMany({ data })
-      const result = await repository.search({}) as any
+      const result = (await repository.search({})) as any
       expect(result.total).toBe(16)
       expect(result.rows.length).toBe(15)
       result.rows.forEach(row => {

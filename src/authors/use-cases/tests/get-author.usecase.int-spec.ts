@@ -1,21 +1,21 @@
-import { Test, TestingModule } from "@nestjs/testing"
-import { PrismaClient } from "@prisma/client"
-import { execSync } from "child_process"
-import { AuthorsRepository } from "@/authors/repositories/authors.repository"
-import { AuthorDataBuilder } from "@/authors/helpers/author-data-builder"
-import { GetAuthorUseCase } from "../get-author.usecase"
-import { NotFoundError } from "@/shared/errors/not-found-error"
+import { Test, TestingModule } from '@nestjs/testing'
+import { PrismaClient } from '@prisma/client'
+import { execSync } from 'child_process'
+import { AuthorsRepository } from '@/authors/repositories/authors.repository'
+import { AuthorDataBuilder } from '@/authors/helpers/author-data-builder'
+import { GetAuthorUseCase } from '../get-author.usecase'
+import { NotFoundError } from '@/shared/errors/not-found-error'
 
-describe("GetAuthorUseCase Integration Test", () => {
+describe('GetAuthorUseCase Integration Test', () => {
   let module: TestingModule
   let repository: AuthorsRepository
   let usecase: GetAuthorUseCase.Usecase
   const prisma = new PrismaClient()
 
-  jest.setTimeout(60000);
+  jest.setTimeout(60000)
 
   beforeAll(async () => {
-    execSync("npm run prisma:migrate-test")
+    execSync('npm run prisma:migrate-test')
     await prisma.$connect()
     module = await Test.createTestingModule({}).compile()
     repository = new AuthorsRepository(prisma as any)

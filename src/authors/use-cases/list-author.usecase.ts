@@ -1,7 +1,7 @@
-import { SearchInput } from "@/shared/dto/search-input"
-import { AuthorsRepository } from "../repositories/authors.repository"
-import { PaginationOutput } from "@/shared/dto/pagination-output"
-import { AuthorOutput } from "../dto/author.output"
+import { SearchInput } from '@/shared/dto/search-input'
+import { AuthorsRepository } from '../repositories/authors.repository'
+import { PaginationOutput } from '@/shared/dto/pagination-output'
+import { AuthorOutput } from '../dto/author.output'
 
 export namespace ListAuthorsUseCase {
   export type Input = SearchInput
